@@ -8,232 +8,264 @@
 
 <style>
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-  color: white;
-  background: linear-gradient(135deg, #080d1c, #182449, #351a45);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+    background:
+        radial-gradient(ellipse at 20% 20%, #293a66, transparent 45%),
+        radial-gradient(ellipse at 85% 80%, #542d67, transparent 42%),
+        linear-gradient(135deg, #080d1c, #101a35 55%, #1c1030);
 }
 
-/* Floating bubbles */
+/* Animated bubbles */
 #bubbles {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
 }
 
 .bubble {
-  position: absolute;
-  bottom: -80px;
-  border: 1px solid rgba(255,255,255,.45);
-  border-radius: 50%;
-  background: radial-gradient(
-    circle at 30% 25%,
-    rgba(255,255,255,.6),
-    rgba(120,160,255,.12),
-    transparent 75%
-  );
-  box-shadow: inset -5px -5px 15px #a6c8ff20;
-  animation: floatUp linear infinite;
+    position: absolute;
+    bottom: -100px;
+    border: 1px solid rgba(255,255,255,.45);
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 28% 24%,
+        rgba(255,255,255,.7),
+        rgba(130,190,255,.12) 40%,
+        transparent 75%
+    );
+    box-shadow: inset -5px -8px 18px rgba(130,175,255,.1);
+    animation: rise linear infinite;
 }
 
-@keyframes floatUp {
-  0% {
-    transform: translateY(0) translateX(0);
-    opacity: 0;
-  }
-  15% { opacity: .8; }
-  85% { opacity: .6; }
-  100% {
-    transform: translateY(-120vh) translateX(70px);
-    opacity: 0;
-  }
+@keyframes rise {
+    0% {
+        transform: translate(0, 0) scale(.75);
+        opacity: 0;
+    }
+    15% { opacity: .8; }
+    85% { opacity: .5; }
+    100% {
+        transform: translate(var(--drift), -120vh) scale(1.15);
+        opacity: 0;
+    }
 }
 
 /* Login card */
 .login-box {
-  position: relative;
-  z-index: 2;
-  width: min(390px, 90%);
-  padding: 35px;
-  border-radius: 25px;
-  border: 1px solid #ffffff35;
-  background: #ffffff12;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 20px 70px #0006;
+    position: relative;
+    z-index: 2;
+    width: min(420px, calc(100% - 32px));
+    padding: 35px;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 27px;
+    background: rgba(255,255,255,.09);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    box-shadow: 0 28px 80px rgba(0,0,0,.4);
 }
 
 .logo {
-  width: 55px;
-  height: 55px;
-  display: grid;
-  place-items: center;
-  border-radius: 17px;
-  color: #10152e;
-  background: linear-gradient(135deg, #a9c1ff, #e5b4ff);
-  font-size: 28px;
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    border-radius: 17px;
+    background: linear-gradient(135deg, #8aa7ff, #d28cff);
+    color: #10142b;
+    font-size: 27px;
 }
 
-.tag {
-  margin-top: 24px;
-  color: #b8c7ff;
-  font-size: 11px;
-  letter-spacing: 3px;
+.eyebrow {
+    margin: 24px 0 8px;
+    color: #b8c7ff;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 3px;
 }
 
 h1 {
-  margin-top: 10px;
-  font-size: 34px;
+    font-size: 34px;
+    letter-spacing: -1px;
 }
 
 .description {
-  margin: 13px 0 26px;
-  color: #c2c9dd;
-  font-size: 14px;
-  line-height: 1.6;
+    margin: 13px 0 27px;
+    color: #c1c9df;
+    font-size: 14px;
+    line-height: 1.7;
 }
 
 label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 12px;
-  letter-spacing: 1px;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .input-area {
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-  border: 1px solid #ffffff30;
-  border-radius: 13px;
-  background: #05091970;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 14px;
+    background: rgba(5,9,25,.4);
+    transition: .25s;
 }
 
 .input-area:focus-within {
-  border-color: #b8c7ff;
-  box-shadow: 0 0 0 3px #a5b7ff20;
+    border-color: #a8b7ff;
+    box-shadow: 0 0 0 3px rgba(135,151,255,.15);
 }
 
 input {
-  width: 100%;
-  padding: 15px 5px;
-  border: none;
-  outline: none;
-  color: white;
-  background: transparent;
-  font-size: 16px;
-  letter-spacing: 3px;
+    width: 100%;
+    padding: 15px 7px;
+    border: none;
+    outline: none;
+    color: white;
+    background: transparent;
+    font-size: 16px;
+    letter-spacing: 3px;
 }
 
 input::placeholder {
-  color: #8992ad;
-  letter-spacing: 1px;
+    color: #8992ad;
+    letter-spacing: 1px;
 }
 
 .eye {
-  border: none;
-  background: none;
-  color: white;
-  cursor: pointer;
-  font-size: 18px;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 19px;
+    cursor: pointer;
 }
 
 .error {
-  min-height: 27px;
-  padding-top: 8px;
-  color: #ff9eae;
-  font-size: 12px;
+    min-height: 28px;
+    padding-top: 9px;
+    color: #ff9eae;
+    font-size: 12px;
 }
 
-button.unlock {
-  width: 100%;
-  padding: 15px;
-  border: none;
-  border-radius: 13px;
-  color: #15172b;
-  background: linear-gradient(100deg, #b8c7ff, #e4b7ff);
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: .25s;
+.unlock {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 14px;
+    color: #15172b;
+    background: linear-gradient(100deg, #b8c7ff, #e4b7ff);
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .25s;
 }
 
-button.unlock:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px #b5a3ff35;
+.unlock:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(181,163,255,.3);
+    filter: brightness(1.06);
 }
 
 .footer {
-  margin-top: 22px;
-  text-align: center;
-  color: #8e99b8;
-  font-size: 10px;
-  letter-spacing: 1px;
+    margin-top: 22px;
+    color: #8e99b8;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 1px;
 }
 
-/* Photo popup */
+/* Photo screen */
 #photoScreen {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 5;
-  padding: 25px;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  background: #070a17ed;
-  backdrop-filter: blur(18px);
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    padding: 25px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    background: rgba(5,8,20,.94);
+    backdrop-filter: blur(18px);
 }
 
-#photoScreen img {
-  max-width: 90vw;
-  max-height: 75vh;
-  margin-top: 20px;
-  object-fit: contain;
-  border-radius: 20px;
-  border: 1px solid #ffffff50;
-  box-shadow: 0 20px 70px #0009;
-  animation: reveal .7s ease;
+#photoScreen h2 {
+    font-size: 25px;
+}
+
+#myPhoto {
+    display: block;
+    max-width: 90vw;
+    max-height: 76vh;
+    margin-top: 20px;
+    object-fit: contain;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 20px;
+    box-shadow: 0 20px 70px rgba(0,0,0,.6);
+    animation: reveal .6s ease;
 }
 
 @keyframes reveal {
-  from {
-    opacity: 0;
-    transform: scale(.85);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+    from {
+        opacity: 0;
+        transform: scale(.88);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .close {
-  position: fixed;
-  top: 20px;
-  right: 25px;
-  border: 1px solid #ffffff40;
-  border-radius: 50%;
-  padding: 8px 14px;
-  color: white;
-  background: #ffffff15;
-  font-size: 25px;
-  cursor: pointer;
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    padding: 7px 14px;
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    color: white;
+    background: rgba(255,255,255,.1);
+    font-size: 25px;
+    cursor: pointer;
 }
 
-@media(max-width: 450px) {
-  .login-box { padding: 27px 23px; }
-  h1 { font-size: 30px; }
+.caption {
+    margin-top: 15px;
+    color: #c1c9df;
+    font-size: 13px;
+}
+
+@media (max-width: 450px) {
+    .login-box {
+        padding: 27px 23px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition: none !important;
+    }
 }
 </style>
 </head>
@@ -242,115 +274,156 @@ button.unlock:hover {
 
 <div id="bubbles"></div>
 
-<div class="login-box" id="loginBox">
-  <div class="logo">✦</div>
+<!-- LOGIN PAGE -->
+<main class="login-box" id="loginBox">
 
-  <p class="tag">PERSONAL SPACE</p>
-  <h1>Welcome back.</h1>
+    <div class="logo">✦</div>
 
-  <p class="description">
-    A little corner of the internet, just for you.
-    Enter your password to reveal your photo.
-  </p>
+    <p class="eyebrow">PERSONAL SPACE</p>
+    <h1>Welcome back.</h1>
 
-  <form id="loginForm">
-    <label for="password">ACCESS PASSWORD</label>
+    <p class="description">
+        A little corner of the internet, just for you.
+        Enter your password to reveal your photo.
+    </p>
 
-    <div class="input-area">
-      <input
-        id="password"
-        type="password"
-        placeholder="Enter password"
-        autocomplete="off"
-        required
-      >
-      <button class="eye" type="button" id="toggle">◉</button>
-    </div>
+    <form id="loginForm">
+        <label for="password">ACCESS PASSWORD</label>
 
-    <p class="error" id="error"></p>
+        <div class="input-area">
+            <input
+                id="password"
+                type="password"
+                placeholder="Enter password"
+                autocomplete="off"
+                required
+            >
+            <button
+                class="eye"
+                type="button"
+                id="togglePassword"
+                aria-label="Show password"
+            >◉</button>
+        </div>
 
-    <button class="unlock" type="submit">
-      Unlock my photo ↗
+        <p class="error" id="error" role="status"></p>
+
+        <button class="unlock" type="submit">
+            Unlock my photo ↗
+        </button>
+    </form>
+
+    <p class="footer">
+        ✧ PRIVATE GALLERY · MADE FOR YOU
+    </p>
+
+</main>
+
+<!-- PHOTO PAGE -->
+<section id="photoScreen">
+    <button class="close" id="closePhoto" aria-label="Close photo">
+        ×
     </button>
-  </form>
 
-  <p class="footer">✧ PRIVATE GALLERY · MADE FOR YOU</p>
-</div>
+    <h2>Your Moment ✨</h2>
 
-<!-- Your photo appears after successful login -->
-<div id="photoScreen">
-  <button class="close" id="closePhoto">×</button>
-  <h2>Your Moment ✨</h2>
+    <img
+        id="myPhoto"
+        src="20251122_020330(1)(1).jpg"
+        alt="Avinash's personal photo"
+    >
 
-  <!-- Put your photo in the same folder as this HTML file -->
-  <img src="my-photo.jpg" alt="Avinash's Photo">
-
-  <p style="margin-top:15px;color:#c2c9dd">
-    Some moments deserve their own space.
-  </p>
-</div>
+    <p class="caption">
+        Some moments deserve their own space.
+    </p>
+</section>
 
 <script>
-// Create floating bubbles
-const bubbles = document.getElementById("bubbles");
+// Generate floating bubbles
+const bubbleLayer = document.getElementById("bubbles");
 
 for (let i = 0; i < 35; i++) {
-  const bubble = document.createElement("span");
-  bubble.className = "bubble";
+    const bubble = document.createElement("span");
+    bubble.className = "bubble";
 
-  const size = Math.random() * 45 + 12;
+    const size = 12 + Math.random() * 45;
 
-  bubble.style.width = size + "px";
-  bubble.style.height = size + "px";
-  bubble.style.left = Math.random() * 100 + "%";
-  bubble.style.animationDuration =
-    (Math.random() * 15 + 10) + "s";
-  bubble.style.animationDelay =
-    (-Math.random() * 20) + "s";
+    bubble.style.width = size + "px";
+    bubble.style.height = size + "px";
+    bubble.style.left = Math.random() * 100 + "%";
 
-  bubbles.appendChild(bubble);
+    bubble.style.animationDuration =
+        (10 + Math.random() * 17) + "s";
+
+    bubble.style.animationDelay =
+        (-Math.random() * 25) + "s";
+
+    bubble.style.setProperty(
+        "--drift",
+        (Math.random() * 180 - 90) + "px"
+    );
+
+    bubbleLayer.appendChild(bubble);
 }
 
 // Show or hide password
-document.getElementById("toggle").onclick = function () {
-  const input = document.getElementById("password");
+const passwordInput = document.getElementById("password");
 
-  input.type = input.type === "password"
-    ? "text"
-    : "password";
-};
+document.getElementById("togglePassword").addEventListener("click", () => {
+    passwordInput.type =
+        passwordInput.type === "password" ? "text" : "password";
+});
 
-// Login functionality
-document.getElementById("loginForm").onsubmit = function (event) {
-  event.preventDefault();
+// Login with password 12345
+document.getElementById("loginForm").addEventListener("submit", (event) => {
+    event.preventDefault();
 
-  const password = document.getElementById("password").value;
-  const error = document.getElementById("error");
+    const error = document.getElementById("error");
+    const loginBox = document.getElementById("loginBox");
+    const photoScreen = document.getElementById("photoScreen");
 
-  if (password === "12345") {
-    error.textContent = "";
-    document.getElementById("loginBox").style.display = "none";
-    document.getElementById("photoScreen").style.display = "flex";
-  } else {
-    error.textContent = "Incorrect password. Try again!";
-    document.getElementById("password").value = "";
-  }
-};
+    if (passwordInput.value === "12345") {
+        error.textContent = "";
+        loginBox.style.display = "none";
+        photoScreen.style.display = "flex";
+    } else {
+        error.textContent = "Incorrect password. Please try again.";
+        passwordInput.value = "";
+        passwordInput.focus();
+    }
+});
 
 // Close photo and return to login
-document.getElementById("closePhoto").onclick = function () {
-  document.getElementById("photoScreen").style.display = "none";
-  document.getElementById("loginBox").style.display = "block";
-  document.getElementById("password").value = "";
-};
-
-// Escape key closes the photo
-document.addEventListener("keydown", function (event) {
-  if (event.key === "Escape") {
+function closePhoto() {
     document.getElementById("photoScreen").style.display = "none";
     document.getElementById("loginBox").style.display = "block";
-    document.getElementById("password").value = "";
-  }
+    passwordInput.value = "";
+    passwordInput.focus();
+}
+
+document.getElementById("closePhoto").addEventListener("click", closePhoto);
+
+// Also close photo by clicking the dark background
+document.getElementById("photoScreen").addEventListener("click", (event) => {
+    if (event.target.id === "photoScreen") {
+        closePhoto();
+    }
+});
+
+// Escape key closes the photo
+document.addEventListener("keydown", (event) => {
+    if (
+        event.key === "Escape" &&
+        document.getElementById("photoScreen").style.display === "flex"
+    ) {
+        closePhoto();
+    }
+});
+
+// Show an error if the image filename/path is incorrect
+document.getElementById("myPhoto").addEventListener("error", () => {
+    document.querySelector(".caption").textContent =
+        "Photo not found. Check that the image is in the same folder as this HTML file.";
 });
 </script>
 
